@@ -28,8 +28,10 @@ def checkview(request):
         password = request.POST.get('password')
 
         if not Room.objects.filter(name=room).exists():
-            new_room = Room.objects.create(name=room)
-            new_room.save()
+            messages.error(request, "Business Name does not exist.")
+            return redirect('checkview') 
+            # new_room = Room.objects.create(name=room)
+            # new_room.save()
         if not User.objects.filter(username=username).exists():
             messages.error(request, "Username does not exist.")
             return redirect('home') 
